@@ -1,0 +1,66 @@
+:root {
+  --blue: rgb(68, 171, 223);
+  --blue-background: rgb(165, 218, 245);
+  --blue-light: rgb(217, 237, 247);
+  --green: rgb(42, 199, 89);
+  --green-background: rgb(165, 245, 189);
+  --green-light: rgb(218, 240, 225);
+  --red: rgb(233, 64, 64);
+  --red-background: rgb(245, 165, 165);
+  --red-light: rgb(236, 204, 204);
+}
+
+.root {
+  background-color: #282c34;
+}
+
+.accordion-wrapper {
+  width: 800px;
+  margin: auto;
+}
+
+.margin-5 {
+  margin: 5em;
+}
+
+.blue-background { background-color: var(--blue-background) !important; }
+.green-background { background-color: var(--green-background) !important; }
+.red-background { background-color: var(--red-background) !important; }
+
+.request {
+  border-radius: 10px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: #ffffff solid 1px;
+  margin-right: 1rem;
+  vertical-align: middle;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+.red {
+  background-color: var(--red);
+  border-color: rgb(196, 55, 55);
+}
+
+.green {
+  background-color: var(--green);
+  border-color: rgb(24, 184, 72);
+}
+
+.blue {
+  background-color: var(--blue);
+  border-color: rgb(60, 151, 197);
+}
+
+.blue-background-detail { background-color: var(--blue-light) !important; }
+.green-background-detail { background-color: var(--green-light) !important; }
+.red-background-detail { background-color: var(--red-light) !important; }
+
+.code-snippet {
+  font-family: 'Consolas';
+  font-size: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  padding: 0.5rem;
+}
