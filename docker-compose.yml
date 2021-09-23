@@ -1,0 +1,15 @@
+version: "3"
+services:
+  api:
+    build: ./api-documenter-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./api-documenter-api:/usr/src/app
+  
+  client:
+    build: ./api-documenter-client
+    ports: 
+      - "3000:3000"
+    volumes:
+      - ./api-documenter-client:/usr/src/app

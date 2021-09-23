@@ -8,8 +8,6 @@ import './App.css';
 export default function CustomizedAccordions() {
 
   
-
-
   return (
     <div className="accordion-wrapper">
       <Accordion>
