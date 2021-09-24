@@ -2,7 +2,7 @@ db = db.getSiblingDB('api');
 
 db.createCollection('apidocs');
 
-db.apidocs.insertMany([
+db.getCollection("apidocs").insertMany([
  {
     org: 'helpdev',
     filter: 'EVENT_A',
