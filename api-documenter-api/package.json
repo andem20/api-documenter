@@ -10,7 +10,8 @@
   "dependencies": {
     "pg": "*",
     "express": "*",
-    "nodemon": "*"
+    "nodemon": "*",
+    "mongoose": "*"
   },
   "author": "Anders Lindhardt Madsen",
   "license": "ISC"
