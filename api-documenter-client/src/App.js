@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import './App.css';
 
 export default function CustomizedAccordions() {
-
+  
   
   return (
     <div className="accordion-wrapper">
