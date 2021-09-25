@@ -1,4 +1,4 @@
-const Schemas = require('../models/api_model'); 
+const Schemas = require('../../models/api_model'); 
 
 const getall = (req, res) => {
     Schemas.Api.find({}, function(err, result) {
