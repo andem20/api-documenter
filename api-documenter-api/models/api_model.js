@@ -1,10 +1,13 @@
 const mongoose = require('../config/db');
 
 const apiSchema = new mongoose.Schema({
-    request_type: String,
-    endpoint: String,
-    description: String,
-    output: String
+    apiTitle: String,
+    endpoints: [{
+      requestType: String,
+      endpoint: String,
+      description: String,
+      output: String
+    }]
   });
   
 const Api = mongoose.model('apidocs', apiSchema);

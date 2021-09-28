@@ -1,68 +1,58 @@
 import React from 'react';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
+import { useState, useEffect } from 'react';
 import './App.css';
+import ApiAccordion from './components/ApiAccordion';
 
-export default function CustomizedAccordions() {
+export default function ApiDocsAccordion() {
+
+  const [error, setError] = useState(null);
+  const [apiDocs, setApiDocs] = useState([]);
+  const [isLoaded, setisLoaded] = useState(false)
+
+  function getAllApiDocs() {
+    fetch('http://localhost:8080/api/v1/apidocs')
+      .then(res => res.json())
+      .then(res => {
+        if(res) {
+          setApiDocs(res);
+          setisLoaded(true);
+        }
+      },
+      error => {
+        setError(error);
+        setisLoaded(true);
+      });
+  }
+
+  // Fetch the data once
+  useEffect(() => {
+    getAllApiDocs();
+  }, []);
+
+  console.log(apiDocs, isLoaded);
+
+  let api = apiDocs[0];
   
-  
-  return (
-    <div className="accordion-wrapper">
-      <Accordion>
-        <AccordionSummary className="blue-background" aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>
-            <span className="request blue">
-              /GET
-            </span>
-            /users/&#123;:id&#125;
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails className="blue-background-detail">
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-            <span className="code-snippet">
-              <code>{"body { color: blue; }"}</code>
-            </span>
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary className="green-background" aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>
-            <span className="request green">
-              /POST
-            </span>
-            Collapsible Group Item #2</Typography>
-        </AccordionSummary>
-        <AccordionDetails className="green-background-detail">
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary className="red-background" aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>
-            <span className="request red">
-              /DELETE
-            </span>
-            Collapsible Group Item #3
-            </Typography>
-        </AccordionSummary>
-        <AccordionDetails className="red-background-detail">
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    </div>
-  );
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <div>
+        <div className='title'>{ api.apiTitle }</div>
+        <div className='accordion-wrapper'>
+          {api.endpoints.map(docs => (
+            <ApiAccordion 
+              key={docs.id} 
+              requestType={docs.requestType} 
+              endpoint={docs.endpoint}
+              description={docs.description}
+              output={docs.output}
+              />
+          ))}
+        </div>
+      </div>
+    );
+  }
 }

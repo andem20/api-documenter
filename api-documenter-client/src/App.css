@@ -10,13 +10,28 @@
   --red-light: rgb(236, 204, 204);
 }
 
-.root {
+#root {
   background-color: #282c34;
+}
+
+@font-face {
+  font-family: SecularOne;
+  src: url('./assets/SecularOne-Regular.ttf');
+}
+
+.title {
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 2em;
+  color: #ffffff;
+  font-size: 3em;
+  font-family: 'SecularOne';
 }
 
 .accordion-wrapper {
   width: 800px;
   margin: auto;
+  margin-top: 5em;
 }
 
 .margin-5 {
@@ -63,4 +78,9 @@
   background-color: rgba(0, 0, 0, 0.4);
   color: #ffffff;
   padding: 0.5rem;
+}
+
+.api-docs-accordion {
+
+  margin-bottom: 1em;
 }
