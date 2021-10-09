@@ -16,6 +16,8 @@ app.use(function (req, res, next) {
 
 app.use(URL, routes);
 
+require('./config/db');
+
 app.listen(PORT, () => {
     console.log('Listening on port: ' + PORT);
 });

@@ -25,7 +25,6 @@
   margin-top: 2em;
   color: #ffffff;
   font-size: 3em;
-  font-family: 'SecularOne';
 }
 
 .accordion-wrapper {
@@ -81,6 +80,11 @@
 }
 
 .api-docs-accordion {
-
   margin-bottom: 1em;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-grow-11 { flex-grow: 11; }

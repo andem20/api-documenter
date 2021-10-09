@@ -4,7 +4,7 @@ db.createCollection('apidocs');
 
 db.getCollection("apidocs").insertMany([
   {
-    apiTitle: 'Skill-Tracker',
+    title: 'Skill-Tracker',
     endpoints: [
       {
         requestType: 'POST',
@@ -27,7 +27,7 @@ db.getCollection("apidocs").insertMany([
     ]
   },
   {
-    apiTitle: 'Some Other API',
+    title: 'Some Other API',
     endpoints: [
       {
         requestType: 'POST',
@@ -50,7 +50,7 @@ db.getCollection("apidocs").insertMany([
     ]
   },
   {
-    apiTitle: 'Some Other API again',
+    title: 'Some Other API again',
     endpoints: [
       {
         requestType: 'POST',
