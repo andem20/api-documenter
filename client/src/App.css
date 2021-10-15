@@ -8,6 +8,7 @@
   --red: rgb(233, 64, 64);
   --red-background: rgb(245, 165, 165);
   --red-light: rgb(236, 204, 204);
+  --width: 800px;
 }
 
 #root {
@@ -28,7 +29,7 @@
 }
 
 .accordion-wrapper {
-  width: 800px;
+  width: var(--width);
   margin: auto;
   margin-top: 5em;
 }
@@ -88,3 +89,9 @@
 }
 
 .flex-grow-11 { flex-grow: 11; }
+
+.add-button {
+  width: var(--width);
+  margin: 1em auto auto auto;
+  text-align: right;
+}

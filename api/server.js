@@ -3,6 +3,7 @@ const routes = require('./routes/routes');
 
 const app = express();
 const PORT = 8080;
+process.env.NODE_ENV = 'developement';
 const URL = '/api/v1/';
 
 // Middleware

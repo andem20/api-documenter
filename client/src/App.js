@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import './App.css';
 import ApiAccordion from './components/ApiAccordion';
+import Button from './components/Button'
 import SideBar from './components/SideBar';
 
 export default function ApiDocsAccordion() {
@@ -11,13 +12,11 @@ export default function ApiDocsAccordion() {
   const [apiDoc, setApiDoc] = useState([]);
   const [isLoaded, setisLoaded] = useState(false)
 
-  function getAllApiDocs() {
-    fetch('http://localhost:8080/api/v1/apidocs')
+  async function getAllApiDocs() {
+    await fetch(process.env.REACT_APP_API_URL + '/apidocs')
       .then(res => res.json())
       .then(res => {
-        if(res) {
           setApiDocs(res);
-        }
       },
       error => {
         setError(error);
@@ -29,16 +28,12 @@ export default function ApiDocsAccordion() {
     getAllApiDocs();
   }, []);
 
-  // let api = apiDocs[0];
-
-  function getApi(key) {
-    fetch('http://localhost:8080/api/v1/apidocs/' + key)
+  async function getApi(key) {
+    await fetch(process.env.REACT_APP_API_URL + '/apidocs/' + key)
       .then(res => res.json())
       .then(res => {
-        if(res) {
           setApiDoc(res);
           setisLoaded(true);
-        }
       },
       error => {
         setError(error);
@@ -49,13 +44,16 @@ export default function ApiDocsAccordion() {
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
-    return <div className='flex'>
-    <SideBar apiDocs={apiDocs} getApi={getApi} />
-    <div className='flex-grow-11'>
-      <div className='title'>{ apiDoc.title }</div>
-      <div className='accordion-wrapper'></div>
-    </div>
-  </div>;
+    return (
+      <div className='flex'>
+        <SideBar apiDocs={apiDocs} getApi={getApi} />
+        <div className='flex-grow-11'>
+          <div className='accordion-wrapper'>
+            Choose an api.
+          </div>
+        </div>
+      </div>
+    );
   } else {
     return (
       <div className='flex'>
@@ -65,13 +63,17 @@ export default function ApiDocsAccordion() {
           <div className='accordion-wrapper'>
             {apiDoc.endpoints.map(docs => (
               <ApiAccordion 
-                key={docs.id} 
-                requestType={docs.requestType} 
-                endpoint={docs.endpoint}
-                description={docs.description}
-                output={docs.output}
+                  key={docs._id} 
+                  requestType={docs.requestType} 
+                  endpoint={docs.endpoint}
+                  description={docs.description}
+                  output={docs.output}
                 />
-            ))}
+              )
+            )}
+          </div>
+          <div className='add-button'>
+            <Button value='Add Endpoint' color='green' />
           </div>
         </div>
       </div>

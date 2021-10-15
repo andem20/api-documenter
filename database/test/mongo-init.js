@@ -1,4 +1,4 @@
-db = new Mongo().getDB('api');
+db = new Mongo().getDB('test_api');
 
 db.createUser({
   user: 'anders',

@@ -5,17 +5,25 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import { requestTypeColors } from '../constants/requestTypeColors';
 import '../App.css';
+import Button from './Button';
 
 function ApiAccordion({ requestType, endpoint, description, output }) {
+
+  function deleteEndpoint(e) {
+    e.stopPropagation();
+  }
 
   return (
     <Accordion className='api-docs-accordion'>
       <AccordionSummary className={requestTypeColors[requestType] + "-background"} aria-controls="panel1d-content" id="panel1d-header">
-        <Typography>
+        <Typography style={{ width: '50%' }}>
           <span className={requestTypeColors[requestType] + " request"}>
             { requestType }
           </span>
           { endpoint }
+        </Typography>
+        <Typography style={{ textAlign: 'right', width: '50%' }}>
+          <Button value='X' color='red' onClick={deleteEndpoint} />
         </Typography>
       </AccordionSummary>
       <AccordionDetails className={requestTypeColors[requestType] + "-background-detail"}>
