@@ -4,7 +4,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import { requestTypeColors } from '../constants/requestTypeColors';
-import '../App.css';
+import './ApiAccordion.css';
 import Button from './Button';
 
 function ApiAccordion({ requestType, endpoint, description, output }) {

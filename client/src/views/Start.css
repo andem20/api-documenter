@@ -1,0 +1,32 @@
+
+
+@font-face {
+  font-family: SecularOne;
+  src: url('../assets/SecularOne-Regular.ttf');
+}
+
+.title {
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 2em;
+  color: #ffffff;
+  font-size: 3em;
+}
+
+.accordion-wrapper {
+  width: var(--width);
+  margin: auto;
+  margin-top: 5em;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-grow-11 { flex-grow: 11; }
+
+.add-button {
+  width: var(--width);
+  margin: 1em auto auto auto;
+  text-align: right;
+}

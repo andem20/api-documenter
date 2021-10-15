@@ -1,44 +1,21 @@
 :root {
-  --blue: rgb(68, 171, 223);
-  --blue-background: rgb(165, 218, 245);
-  --blue-light: rgb(217, 237, 247);
-  --green: rgb(42, 199, 89);
-  --green-background: rgb(165, 245, 189);
-  --green-light: rgb(218, 240, 225);
-  --red: rgb(233, 64, 64);
-  --red-background: rgb(245, 165, 165);
-  --red-light: rgb(236, 204, 204);
-  --width: 800px;
-}
+   --blue: rgb(68, 171, 223);
+   --blue-background: rgb(165, 218, 245);
+   --blue-light: rgb(217, 237, 247);
+   --green: rgb(42, 199, 89);
+   --green-background: rgb(165, 245, 189);
+   --green-light: rgb(218, 240, 225);
+   --red: rgb(233, 64, 64);
+   --red-background: rgb(245, 165, 165);
+   --red-light: rgb(236, 204, 204);
+   --width: 800px;
+ }
+ 
+ #root {
+   background-color: #282c34;
+ }
 
-#root {
-  background-color: #282c34;
-}
-
-@font-face {
-  font-family: SecularOne;
-  src: url('./assets/SecularOne-Regular.ttf');
-}
-
-.title {
-  text-transform: uppercase;
-  text-align: center;
-  margin-top: 2em;
-  color: #ffffff;
-  font-size: 3em;
-}
-
-.accordion-wrapper {
-  width: var(--width);
-  margin: auto;
-  margin-top: 5em;
-}
-
-.margin-5 {
-  margin: 5em;
-}
-
-.blue-background { background-color: var(--blue-background) !important; }
+ .blue-background { background-color: var(--blue-background) !important; }
 .green-background { background-color: var(--green-background) !important; }
 .red-background { background-color: var(--red-background) !important; }
 
@@ -84,14 +61,8 @@
   margin-bottom: 1em;
 }
 
-.flex {
-  display: flex;
-}
-
-.flex-grow-11 { flex-grow: 11; }
-
-.add-button {
-  width: var(--width);
-  margin: 1em auto auto auto;
-  text-align: right;
-}
+.margin-5 {
+   margin: 5em;
+ }
+ 
+ 
