@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const apiSchema = mongoose.Schema({
+const APISchema = new Schema({
     title: String,
     endpoints: [{
       requestType: String,
@@ -10,4 +11,5 @@ const apiSchema = mongoose.Schema({
     }]
   });
   
-module.exports = mongoose.model('apidocs', apiSchema);
+
+module.exports = mongoose.model('apidocs', APISchema);

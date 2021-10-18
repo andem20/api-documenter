@@ -1,5 +1,5 @@
 const { mongoose } = require('mongoose');
-const api_model = require('../../models/api_model');
+const APIDoc = require('../../models/APIDoc');
 
 const createApiDoc = (req, res) => {
 	console.log(req.body);

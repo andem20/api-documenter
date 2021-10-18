@@ -1,11 +1,11 @@
 const { mongoose } = require('mongoose');
-const api_model = require('../../models/api_model');
+const APIDoc = require('../../models/APIDoc');
 
 const createApiDoc = (req, res) => {
 	console.log(req.params.id);
    const filter = {_id: req.params.id};
 
-	api_model.updateOne(filter, 
+	APIDoc.updateOne(filter, 
    { 
       $push: {
          endpoints: req.body

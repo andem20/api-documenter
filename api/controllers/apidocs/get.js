@@ -1,7 +1,7 @@
-const api_docs = require('../../models/api_model'); 
+const APIDoc = require('../../models/APIDoc'); 
 
 const get = (req, res) => {
-    api_docs.findById(req.params.id, (err, result) => {
+    APIDoc.findById(req.params.id, (err, result) => {
         if(err) {
             console.log(err);
         } else {
