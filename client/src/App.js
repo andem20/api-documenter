@@ -1,11 +1,9 @@
 import React from 'react';
 import Start from './views/Start';
-import AddEndpoint from './views/AddEndpoint';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 export default function ApiDocsAccordion() {
@@ -15,9 +13,6 @@ export default function ApiDocsAccordion() {
       <Switch>
           <Route exact path="/">
             <Start />
-          </Route>
-          <Route exact path="/endpoint/add">
-            <AddEndpoint />
           </Route>
         </Switch>
     </Router>

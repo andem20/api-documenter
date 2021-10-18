@@ -10,12 +10,12 @@
   "dependencies": {
     "express": "*",
     "mongoose": "*",
-    "nodemon": "*",
-    "pg": "*"
+    "nodemon": "*"
   },
   "author": "Anders Lindhardt Madsen",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^9.1.2"
+    "jest": "^27.3.0",
+    "supertest": "^6.1.6"
   }
 }

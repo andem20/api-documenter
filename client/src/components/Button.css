@@ -1,12 +1,14 @@
-button {
-   padding: 0.7em 1.5em 0.7em 1.5em;
-   border-radius: 10px;
+.button {
+   padding: 0.5em 1em 0.5em 1em;
+   border-radius: 5px;
    border: none;
    font-weight: bold;
    background-color: #ffffff;
+   text-decoration: none;
+   font-size: 0.8rem;
 }
 
-button:hover {
+.button:hover {
    cursor: pointer;
 }
 

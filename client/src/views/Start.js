@@ -4,48 +4,50 @@ import Button from '../components/Button'
 import SideBar from '../components/SideBar';
 import { useState, useEffect } from 'react';
 import './Start.css';
+import ObjectID from 'bson-objectid';
+import REQUEST from '../utils/fetch';
 
 function StartView() {
-   const [error, setError] = useState(null);
-  const [apiDocs, setApiDocs] = useState([]);
+  const [error, setError] = useState(null);
+  const [apiDocsData, setApiDocsData] = useState([]);
   const [apiDoc, setApiDoc] = useState([]);
-  const [isLoaded, setisLoaded] = useState(false)
+  const [endpoints, setEndpoints] = useState([]);
 
   async function getAllApiDocs() {
-    await fetch(process.env.REACT_APP_API_URL + '/apidocs')
-      .then(res => res.json())
-      .then(res => {
-          setApiDocs(res);
-      },
-      error => {
-        setError(error);
-      });
+    REQUEST('/apidocs/').then(res => setApiDocsData(res), error => setError(error));
   }
 
   // Fetch the data once
-  useEffect(() => {
-    getAllApiDocs();
-  }, []);
+  useEffect(() => getAllApiDocs(), []);
 
-  async function getApi(key) {
-    await fetch(process.env.REACT_APP_API_URL + '/apidocs/' + key)
-      .then(res => res.json())
+  async function getApi(url) {
+    REQUEST(url)
       .then(res => {
           setApiDoc(res);
-          setisLoaded(true);
+          setEndpoints(res.endpoints);
       },
       error => {
         setError(error);
-        setisLoaded(true);
       });
  }
-  
+
+  function addEndpoint() {
+    setEndpoints([...endpoints, {
+      _id: ObjectID().toHexString(),
+      requestType: 'REQUEST TYPE', 
+      endpoint: '/endpoint', 
+      description: 'Description', 
+      output: '{output}',
+      editable: true
+    }]);
+  }
+
   if (error) {
     return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
+  } else if (apiDoc.length === 0) {
     return (
       <div className='flex'>
-        <SideBar apiDocs={apiDocs} getApi={getApi} />
+        <SideBar apiDocs={apiDocsData} getApi={getApi} />
         <div className='flex-grow-11'>
           <div className='accordion-wrapper'>
             Choose an api.
@@ -56,23 +58,24 @@ function StartView() {
   } else {
     return (
       <div className='flex'>
-        <SideBar apiDocs={apiDocs} getApi={getApi} />
+        <SideBar apiDocs={apiDocsData} getApi={getApi} />
         <div className='flex-grow-11'>
           <div className='title'>{ apiDoc.title }</div>
           <div className='accordion-wrapper'>
-            {apiDoc.endpoints.map(docs => (
+            {endpoints.map(endpoint => (
+              // TODO clean up
               <ApiAccordion 
-                  key={docs._id} 
-                  requestType={docs.requestType} 
-                  endpoint={docs.endpoint}
-                  description={docs.description}
-                  output={docs.output}
+                  key={endpoint._id} 
+                  endpointData={endpoint}
+                  apiDocLinks={apiDoc.links}
+                  setEndpoints={setEndpoints}
+                  endpoints={endpoints}
                 />
               )
             )}
           </div>
           <div className='add-button'>
-            <Button value='Add Endpoint' color='green' />
+            <Button value='Add Endpoint' color='green' onClick={addEndpoint} />
           </div>
         </div>
       </div>
