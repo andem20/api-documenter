@@ -4,7 +4,7 @@ const APIDoc = require('../../models/APIDoc');
 const getall = (req, res) => {
 	APIDoc.find({}, '_id, title', (err, result) => {
 		if(err) {
-			console.log(err);
+			res.json(err);
 		} else {
 			res.json(result.map(doc => ({...doc._doc, 
 						links: {

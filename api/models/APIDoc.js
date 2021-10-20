@@ -12,4 +12,4 @@ const APISchema = new Schema({
   });
   
 
-module.exports = mongoose.model('apidocs', APISchema);
+module.exports = mongoose.model('apidocs', APISchema, 'apidocs');

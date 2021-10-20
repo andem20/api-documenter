@@ -8,14 +8,16 @@ services:
     ports: 
       - 27017:27017
     volumes:
-      - ./database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./database/:/docker-entrypoint-initdb.d/
 
   api:
     build: ./api
     ports:
-      - 8080:8080
+      - 8000:8080
     volumes:
       - ./api:/usr/src/app
+    environment:
+      NODE_ENV: production
   
   client:
     build: ./client
