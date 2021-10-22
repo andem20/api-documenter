@@ -169,11 +169,107 @@ describe('Integration tests', () => {
   });
   
   describe('Users', () => {
-    test('/POST /user/login--> logged in user data', () => {})
-    test('/POST /user/register--> registered user data', () => {})
-    test('/GET /user/:id --> user data with sepcified id', () => {})
-    test('/PUT /user/:id --> newly updated user data with specified id', () => {})
-    test('/DELETE /user/:id --> status response', () => {})
+    test('/POST /user/login--> logged in user data', async () => {
+      const loginData = {
+        email: 'some@email.com',
+        password: 'password'
+      };
+
+      return await request(app).post(`${BASE_URL}/users/login`)
+        .send(loginData)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+          expect(response.body).toEqual(
+            expect.objectContaining({
+              token: expect.any(String)
+            })
+          );
+        });
+    });
+
+    test('/POST /user/login--> failed authentication', async () => {
+      const loginDataWrongPassword = {
+        email: 'some@email.com',
+        password: 'wrongpassword'
+      };
+
+      await request(app).post(`${BASE_URL}/users/login`)
+        .send(loginDataWrongPassword)
+        .expect('Content-Type', /json/)
+        .expect(401);
+
+        const loginDataWrongEmail = {
+          email: 'wrong@email.com',
+          password: 'password'
+        };
+  
+        return await request(app).post(`${BASE_URL}/users/login`)
+          .send(loginDataWrongEmail)
+          .expect('Content-Type', /json/)
+          .expect(401);
+    });
+
+    test('/POST /user/register--> registered user data', async () => {
+      const userData = {
+        username: 'newUser',
+        email: 'new@email.com',
+        password: 'somepassword'
+      };
+
+      return await request(app).post(`${BASE_URL}/users/register`)
+        .send(userData)
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .then(response => {
+          expect(response.body).toEqual(
+            expect.objectContaining({
+              token: expect.any(String)
+            })
+          );
+        });
+    });
+
+    test('/GET /user/:id --> user data with sepcified id', async () => {
+      return await request(app).get(`${BASE_URL}/users/617270faba0e1204399654b3`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+          expect(response.body).toEqual(
+            expect.objectContaining({
+              username: expect.any(String),
+              apidocs_ids: expect.arrayContaining([expect.any(String)])
+            })
+          );
+        })
+    });
+
+    test('/PUT /user/:id --> newly updated user data with specified id', async () => {
+      const updatedUserData = {
+        _id: '617270faba0e1204399654b3',
+        username: 'updatedUsername',
+        email: 'new@email.com',
+        password: 'somepassword'
+      };
+
+      return await request(app).put(`${BASE_URL}/users/617270faba0e1204399654b3`)
+        .send(updatedUserData)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+          expect(response.body).toEqual(
+            expect.objectContaining({
+              token: expect.any(String)
+            })
+          );
+        });
+    });
+
+    test('/DELETE /user/:id --> status response', async () => {
+      return await request(app).delete(`${BASE_URL}/users/617270faba0e1204399654b3`)
+        .expect('Content-Type', /json/)
+        .expect(200);
+    });
   });
 
   describe('Helper functions', () => {
