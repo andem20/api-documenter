@@ -160,11 +160,9 @@ describe('Integration tests', () => {
     });
 
     test('/DELETE /apidocs/:id/endpoint/:id --> status response', async () => {
-      test('/DELETE /apidocs/:id --> status response', async () => {
-        return await request(app).delete(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685/endpoint/61726d4b33a38f70c3f93613`)
-          .expect('Content-Type', /json/)
-          .expect(200);
-      });
+      return await request(app).delete(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685/endpoint/61726d4b33a38f70c3f93613`)
+        .expect('Content-Type', /json/)
+        .expect(200);
     });
   });
   
