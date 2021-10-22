@@ -88,6 +88,7 @@ describe('Integration tests', () => {
       };
 
       return await request(app).post(`${BASE_URL}/apidocs`)
+        .send(apidoc)
         .expect('Content-Type', /json/)
         .expect(201)
         .then(response => {
@@ -96,39 +97,75 @@ describe('Integration tests', () => {
     });
 
     test('/PUT /apidocs/:id --> newly updated apidoc with specified id', async () => {
+      let updatedApidoc = {};
+
+      await request(app).get(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685`)
+        .then(response => {
+          response.title = 'Updated title';
+          updatedApiDoc = response;
+        });
+
       return await request(app).put(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685`)
+        .send(updatedApidoc)
         .expect('Content-Type', /json/)
         .expect(200)
         .then(response => {
-          expect(response.body).toEqual(
-            expect.objectContaining({
-              _id: expect.any(String),
-              title: expect.any(String),
-              endpoints: expect.arrayContaining([
-                expect.objectContaining({
-                  _id: expect.any(String),
-                  requestType: expect.any(String),
-                  endpoint: expect.any(String),
-                  description: expect.any(String),
-                  output: expect.any(String)
-                })
-              ])
-            })
-          );
+          expect(response.body).toEqual(updatedApiDoc);
         });
     });
 
     test('/DELETE /apidocs/:id --> status response', async () => {
-      return await request(app).put(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685`)
+      return await request(app).delete(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685`)
         .expect('Content-Type', /json/)
         .expect(200);
     });
   });
   
   describe('API endpoints', () => {
-    test('/POST /apidocs/:id/endpoint --> newly created endpoint', async () => {})
-    test('/PUT /apidocs/:id/endpoint/:id --> newly updated endpoint', async () => {})
-    test('/DELETE /apidocs/:id/endpoint/:id --> status response', async () => {})
+    test('/POST /apidocs/:id/endpoint --> newly created endpoint', async () => {
+      // Prepare new apidoc
+      const endpoint = {
+        _id: '6172683d6200028f38d928b0',
+        requestType: 'POST',
+        endpoint: '/somenewendpoint',
+        description: 'This is the description.',
+        output: 'This is the output'
+      };
+
+      return await request(app).post(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685/endpoint`)
+        .send(endpoint)
+        .expect('Content-Type', /json/)
+        .expect(201)
+        .then(response => {
+          expect(response.body).toEqual(endpoint);
+        });
+    });
+
+    test('/PUT /apidocs/:id/endpoint/:id --> newly updated endpoint', async () => {
+      const updatedEndpoint = {
+        _id: '61726d4b33a38f70c3f93613',
+        requestType: 'GET',
+        endpoint: '/users/:id',
+        description: 'This is some description of POST',
+        output: '{test: "POST"}'
+      };
+
+      return await request(app).put(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685/endpoint/61726d4b33a38f70c3f93613`)
+        .send(updatedEndpoint)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .then(response => {
+          expect(response.body).toEqual(updatedEndpoint);
+        });
+    });
+
+    test('/DELETE /apidocs/:id/endpoint/:id --> status response', async () => {
+      test('/DELETE /apidocs/:id --> status response', async () => {
+        return await request(app).delete(`${BASE_URL}/apidocs/617264c46a0e589fd24f1685/endpoint/61726d4b33a38f70c3f93613`)
+          .expect('Content-Type', /json/)
+          .expect(200);
+      });
+    });
   });
   
   describe('Users', () => {
