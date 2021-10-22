@@ -4,18 +4,19 @@
   "description": "API for the API documentation tool",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon main",
-    "test": "jest --detectOpenHandles"
-  },
-  "dependencies": {
-    "express": "*",
-    "mongoose": "*",
-    "nodemon": "*"
+    "start": "node server",
+    "dev": "nodemon server",
+    "test": "jest --detectOpenHandles --watchAll"
   },
   "author": "Anders Lindhardt Madsen",
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  },
   "devDependencies": {
     "jest": "^27.3.0",
+    "nodemon": "^2.0.14",
     "supertest": "^6.1.6"
   }
 }
