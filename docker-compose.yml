@@ -17,7 +17,7 @@ services:
     volumes:
       - ./api:/usr/src/app
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
   
   client:
     build: ./client

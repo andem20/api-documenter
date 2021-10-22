@@ -65,8 +65,14 @@ describe('Integration tests', () => {
         });
     });
 
-    test('/GET /apidocs/:id (invalid id) --> repond with 404 not found', async () => {
+    test('/GET /apidocs/:id (invalid id format) --> repond with 406 not acceptable', async () => {
       return await request(app).get(`${BASE_URL}/apidocs/123456789`)
+        .expect('Content-Type', /json/)
+        .expect(406);
+    });
+
+    test('/GET /apidocs/:id (doesnot exist) --> repond with 404 not found', async () => {
+      return await request(app).get(`${BASE_URL}/apidocs/61729330266119ceb1b549aa`)
         .expect('Content-Type', /json/)
         .expect(404);
     });
@@ -270,8 +276,8 @@ describe('Integration tests', () => {
     });
   });
 
-  describe('Helper functions', () => {
-    test('Hashing salted password', () => {});
-    test('Compare passwords', () => {});
+  test('Extract user data from token', () => {
+    // Login
+    // Extract data from token
   });
 });
