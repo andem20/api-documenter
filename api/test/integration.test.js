@@ -98,7 +98,9 @@ describe('Integration tests', () => {
         .expect('Content-Type', /json/)
         .expect(201)
         .then(response => {
-          expect(response.body).toEqual(apidoc);
+          expect(response.body).toEqual(
+            expect.objectContaining(apidoc)
+          )
         });
     });
 
@@ -116,7 +118,9 @@ describe('Integration tests', () => {
         .expect('Content-Type', /json/)
         .expect(200)
         .then(response => {
-          expect(response.body).toEqual(updatedApiDoc);
+          expect(response.body).toEqual(
+            expect.objectContaining(updatedApiDoc)
+          )
         });
     });
 
@@ -143,7 +147,9 @@ describe('Integration tests', () => {
         .expect('Content-Type', /json/)
         .expect(201)
         .then(response => {
-          expect(response.body).toEqual(endpoint);
+          expect(response.body).toEqual(
+            expect.objectContaining(endpoint)
+          )
         });
     });
 
@@ -161,7 +167,8 @@ describe('Integration tests', () => {
         .expect('Content-Type', /json/)
         .expect(200)
         .then(response => {
-          expect(response.body).toEqual(updatedEndpoint);
+          expect(response.body).toEqual(
+            expect.objectContaining(updatedEndpoint));
         });
     });
 
